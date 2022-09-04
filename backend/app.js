@@ -2,10 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const path = require('path');
 
 dotenv.config();
 
+const saucesRoutes = require('./routes/sauce');
 const userRoutes = require('./routes/user');
+
 //Permets l'utilisation d'express
 const app = express();
 
@@ -25,6 +28,8 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASS
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 app.use('/api/auth', userRoutes);
+app.use('/api/sauces', saucesRoutes);
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 //Exportation du module pour pouvoir l'utiliser à travers le projet
 module.exports = app;
