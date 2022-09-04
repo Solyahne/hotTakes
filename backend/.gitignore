@@ -12,5 +12,7 @@ yarn-error.log
 .history/*
 
 #Images 
-
 /images
+
+#Secrets 
+.env

@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const userRoutes = require('./routes/user');
 //Permets l'utilisation d'express
@@ -13,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 //Connexion de la base de donnée MongoDB
-mongoose.connect('mongodb+srv://Solyane:JrYBdKcl54wfmbP7@cluster0.akbs6yx.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_ADDRESS}`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
