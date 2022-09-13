@@ -62,16 +62,24 @@ exports.modifySauce = (req, res, next) => {
             if (sauce.userId != req.auth.userId) {
                 res.status('400').json({ message: 'Non-autorisé ' });
             } else {
-                const filename = sauce.imageUrl.split('/images/')[1];
-                fs.unlink(`images/${filename}`, () => {
-                    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id, imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` })
-                        .then(() => res.status(200).json({ message: 'Objet modifié!' }))
-                        .catch(error => {
-                            return res.status(400).json({ error });
-                        });
-                })
-            }
-        })
+                if (req.file != null) {
+                    const filename = sauce.imageUrl.split('/images/')[1];
+                    fs.unlink(`images/${filename}`, () => {
+                        Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id, imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}` })
+                            .then(() => res.status(200).json({ message: 'Objet modifié!' }))
+                            .catch(error => {
+                                return res.status(400).json({ error });
+                            });
+                    }
+                    )
+                } else {
+                    Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
+                    .then(() => res.status(200).json({ message: 'Objet modifié!' }))
+                    .catch(error => {
+                        return res.status(400).json({ error });
+                    });
+                }
+            }})
         .catch((error) => {
             res.status(400).json({ error });
         })
