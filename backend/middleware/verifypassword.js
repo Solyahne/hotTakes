@@ -4,7 +4,7 @@ const regexPassword = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,
 module.exports = (req, res, next) => {
 
     const password = req.body.password;
-    //Si l'email correspond, on passe à la suite
+    //Si le mdp correspond, on passe à la suite
     if (regexPassword.test(password)) {
         next();
     } else {

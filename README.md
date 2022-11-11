@@ -25,3 +25,12 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Mot de passe 
+
+Le mot de passe doit correspondre à certaines exigences de sécurité : 
+- Contenir au moins une majuscule 
+- Contenir au moins une minuscule 
+- Contenir au moins un chiffre 
+- Contenir au moins un caractère spécial 
+- Contenir entre 8 et 16 caractères

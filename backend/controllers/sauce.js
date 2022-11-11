@@ -56,7 +56,7 @@ exports.createSauce = (req, res, next) => {
 
 //Modification d'une sauce
 exports.modifySauce = (req, res, next) => {
-    //Si une image est présente dans la requête, on précise l'URL de l'image, sinon la requête est prise telle qu'elle
+    //Si une image est présente dans la requête, on précise l'URL de l'image, sinon la requête est prise telle quelle
     const sauceObject = req.file ? {
         ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
